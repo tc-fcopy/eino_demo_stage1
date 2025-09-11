@@ -127,7 +127,9 @@ func runStatefulGraph() error {
 		return err
 	}
 	input := map[string]string{"role": "民主党人", "content": "我应该支持民主党还是共和党？"}
-	answer, err := r.Invoke(ctx, input)
+	// 加入handler
+	handler := genCallBack()
+	answer, err := r.Invoke(ctx, input, compose.WithCallbacks(handler))
 	if err != nil {
 		return err
 	}
